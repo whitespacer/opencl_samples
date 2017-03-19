@@ -1,1 +1,3 @@
-# spbau_opencl
+# Примеры к курсу по OpenCL
+
+На текущий момент работоспобоность примера проверена под windows с установленным nvidia cuda toolkit (opencl 1.2).
