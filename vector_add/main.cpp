@@ -74,7 +74,7 @@ int main()
       kernel_gmem.setArg(0, dev_a);
       kernel_gmem.setArg(1, dev_b);
       kernel_gmem.setArg(2, dev_c);
-      kernel_gmem.setArg(3, test_array_size);
+      kernel_gmem.setArg(3, static_cast<int>(test_array_size));
       queue.enqueueNDRangeKernel(kernel_gmem, cl::NullRange, cl::NDRange(test_array_size), cl::NDRange(block_size));
 
       queue.enqueueReadBuffer(dev_c, CL_TRUE, 0, sizeof(int) * test_array_size, &c[0]);
