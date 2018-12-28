@@ -1,6 +1,6 @@
 #define __CL_ENABLE_EXCEPTIONS
 #include <CL/cl.h>
-#include <CL/cl.hpp>
+#include "cl.hpp"
 
 #include <vector>
 #include <fstream>
@@ -80,7 +80,7 @@ int main()
          kernel_gmem.setArg(0, dev_input);
          kernel_gmem.setArg(1, dev_output);
          if (kernel != std::string("gpu_reduce_gmem"))
-            kernel_gmem.setArg(2, cl::Local(sizeof(int)* block_size));
+            kernel_gmem.setArg(2, cl::__local(sizeof(int)* block_size));
 
          cl::Event event;
          queue.enqueueNDRangeKernel(kernel_gmem,
