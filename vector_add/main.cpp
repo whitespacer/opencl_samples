@@ -1,6 +1,6 @@
 #define __CL_ENABLE_EXCEPTIONS
 #include <CL/cl.h>
-#include <CL/cl.hpp>
+#include "cl.hpp"
 
 #include <vector>
 #include <fstream>
@@ -48,7 +48,7 @@ int main()
       }
 
       // create a message to send to kernel
-      size_t const block_size = 512;
+      size_t const block_size = 256;
       size_t const test_array_size = 1024;
 
       std::vector<int> a(test_array_size);
