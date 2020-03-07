@@ -1,6 +1,9 @@
-#define __CL_ENABLE_EXCEPTIONS
+#define CL_HPP_ENABLE_EXCEPTIONS
+#define CL_HPP_MINIMUM_OPENCL_VERSION 110
+#define CL_HPP_TARGET_OPENCL_VERSION 110
+
 #include <CL/cl.h>
-#include "cl.hpp"
+#include "cl2.hpp"
 
 #include <vector>
 #include <fstream>
@@ -28,8 +31,7 @@ int main()
       // load opencl source
       std::ifstream cl_file("reduce.cl");
       std::string cl_string(std::istreambuf_iterator<char>(cl_file), (std::istreambuf_iterator<char>()));
-      cl::Program::Sources source(1, std::make_pair(cl_string.c_str(),
-         cl_string.length() + 1));
+      cl::Program::Sources source(1, cl_string);
 
       // create program
       cl::Program program(context, source);
@@ -80,7 +82,7 @@ int main()
          kernel_gmem.setArg(0, dev_input);
          kernel_gmem.setArg(1, dev_output);
          if (kernel != std::string("gpu_reduce_gmem"))
-            kernel_gmem.setArg(2, cl::__local(sizeof(int)* block_size));
+            kernel_gmem.setArg(2, cl::Local(sizeof(int)* block_size));
 
          cl::Event event;
          queue.enqueueNDRangeKernel(kernel_gmem,

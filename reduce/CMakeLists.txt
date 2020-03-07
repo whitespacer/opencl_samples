@@ -1,8 +1,6 @@
 cmake_minimum_required (VERSION 3.1)
 project(reduce)
 
-set(CMAKE_CXX_STANDARD 11)
-
 # Handle OpenCL
 find_package(OpenCL REQUIRED)
 include_directories(${OpenCL_INCLUDE_DIRS})
