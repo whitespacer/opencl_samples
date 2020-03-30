@@ -2,7 +2,11 @@
 #define CL_HPP_MINIMUM_OPENCL_VERSION 110
 #define CL_HPP_TARGET_OPENCL_VERSION 110
 
+#ifdef __APPLE__
+#include <OpenCL/cl_platform.h>
+#else
 #include <CL/cl.h>
+#endif
 #include "cl2.hpp"
 
 #include <vector>
@@ -59,7 +63,7 @@ int main()
 
       // copy from cpu to gpu
       queue.enqueueWriteBuffer(dev_input, CL_TRUE, 0, sizeof(int) * test_array_size, &input[0]);
-      queue.enqueueWriteBuffer(dev_mask, CL_TRUE, 0, sizeof(int)* mask_size, &mask[0]);
+      queue.enqueueWriteBuffer(dev_mask, CL_TRUE, 0, sizeof(int) * mask_size, &mask[0]);
 
       // load named kernel from opencl source
       cl::Kernel kernel_gmem(program, "gpu_convolution_gmem");
